@@ -1,0 +1,6 @@
+streamlit
+pandas
+plotly
+geoip2
+ipaddress
+requests
