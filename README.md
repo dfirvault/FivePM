@@ -41,8 +41,17 @@ FivePM scans files and directories for a wide range of **Indicators of Compromis
 
 *(Add screenshots once you’ve run it — e.g. overview dashboard, GeoIP map, and summary page)*  
 ```
-![FivePM Screenshot](docs/screenshot_dashboard.png)
-![GeoIP Analysis](docs/screenshot_geoip.png)
+<img width="1894" height="881" alt="image" src="https://github.com/user-attachments/assets/1959dc0a-184a-4c59-a75d-916fd4bd8a86" />
+
+<img width="1885" height="878" alt="image" src="https://github.com/user-attachments/assets/44e984b5-21fd-478a-a7f4-05c82b9ddec3" />
+
+<img width="1861" height="837" alt="image" src="https://github.com/user-attachments/assets/38768883-3bfb-4cc1-a05f-3b6c4123644b" />
+
+<img width="1906" height="881" alt="image" src="https://github.com/user-attachments/assets/d9e59c53-7a42-4bd6-a514-b8402f77429b" />
+
+<img width="1845" height="811" alt="image" src="https://github.com/user-attachments/assets/3c30102f-6ad0-4977-ae86-d85655b87fd5" />
+
+
 ```
 
 ---
