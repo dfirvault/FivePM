@@ -808,7 +808,7 @@ def display_indicators_overview(findings):
                             key=f"metric_btn_{indicator_type}",
                             on_click=set_active_tab_and_filter,
                             args=(indicator_type, indicator_options),
-                            use_container_width=True
+                            width='stretch'
                         )
                     indicator_count += 1
        
@@ -828,7 +828,7 @@ def display_indicators_overview(findings):
         top_indicators_df = pd.DataFrame(indicator_counts[:15], columns=['Indicator', 'Count'])
         fig = px.bar(top_indicators_df, x='Count', y='Indicator', orientation='h',
                     title="Top 15 Indicators by Count")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 def display_ti_report(report_data):
     if 'error' in report_data:
         st.error(report_data['error'])
@@ -866,7 +866,7 @@ def display_global_heatmap(df_geo):
             title="Heatmap of Geolocated IP Addresses"
         )
         fig.update_layout(margin=dict(r=0, t=30, l=0, b=0))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     except Exception as e:
         st.error(f"Failed to render heatmap: {e}")
 def display_ip_analysis(findings, geoip_manager, ti_client):
@@ -890,7 +890,7 @@ def display_ip_analysis(findings, geoip_manager, ti_client):
         st.warning("GeoIP analysis requires databases. Please download them from the sidebar.")
         unique_ips = Counter(match['match'] for match in all_ip_data)
         top_ips_df = pd.DataFrame(unique_ips.most_common(20), columns=['IP Address', 'Count'])
-        st.dataframe(top_ips_df, use_container_width=True)
+        st.dataframe(top_ips_df, width='stretch')
         return
    
     geo_analyzer = GeoIPAnalyzer(geoip_manager)
@@ -914,7 +914,7 @@ def display_ip_analysis(findings, geoip_manager, ti_client):
         country_counts_chart = country_counts[country_counts['Country'] != 'Unknown']
         if not country_counts_chart.empty:
             fig_country_bar = px.bar(country_counts_chart.head(15), x='Count', y='Country', orientation='h', title="Top 15 Countries by IP Count")
-            st.plotly_chart(fig_country_bar, use_container_width=True)
+            st.plotly_chart(fig_country_bar, width='stretch')
         else: st.info("No country information available.")
    
     with col2:
@@ -923,7 +923,7 @@ def display_ip_analysis(findings, geoip_manager, ti_client):
         asn_counts = asn_counts[asn_counts['ASN'] != 'Unknown']
         if not asn_counts.empty:
             fig_asn = px.bar(asn_counts.head(15), x='Count', y='ASN', orientation='h', title="Top 15 ASNs by IP Count")
-            st.plotly_chart(fig_asn, use_container_width=True)
+            st.plotly_chart(fig_asn, width='stretch')
         else: st.info("No ASN information available.")
    
     st.subheader("🔍 Drill Down Analysis & TI Lookup")
@@ -1005,7 +1005,7 @@ def display_detailed_findings(findings, ti_client):
         else:
             filtered_data = all_data
         if not is_ti_supported:
-            st.dataframe(pd.DataFrame(filtered_data), use_container_width=True)
+            st.dataframe(pd.DataFrame(filtered_data), width='stretch')
         else:
             st.markdown(f"**Showing `{len(filtered_data[:100])}` of `{len(filtered_data)}` search results.** (Max 100 displayed for performance)")
            
@@ -1053,7 +1053,7 @@ def display_statistics(findings):
         file_counts = Counter(all_files)
         top_files_df = pd.DataFrame(file_counts.most_common(10), columns=['File', 'Count'])
         fig_files = px.bar(top_files_df, x='Count', y='File', orientation='h', title="Top 10 Files with Most Indicators")
-        st.plotly_chart(fig_files, use_container_width=True)
+        st.plotly_chart(fig_files, width='stretch')
     else:
         st.info("No file data to display.")
 def export_summary_to_csv(findings):
@@ -1079,13 +1079,4 @@ def export_summary_to_csv(findings):
     )
 
 if __name__ == "__main__":
-    # Detect if running as bundled executable (from PyInstaller)
-    if getattr(sys, 'frozen', False):
-        # Running as exe: Launch Streamlit via subprocess
-        # Get the base directory (handles PyInstaller temp dir)
-        base_dir = sys._MEIPASS if hasattr(sys, '_MEIPASS') else os.path.dirname(os.path.abspath(__file__))
-        script_path = os.path.join(base_dir, os.path.basename(__file__))
-        subprocess.call([sys.executable, '-m', 'streamlit', 'run', script_path])
-    else:
-        # Running normally (e.g., under 'streamlit run'): Call main()
         main()
