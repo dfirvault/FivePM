@@ -4,6 +4,8 @@
 It combines regex-based IOC detection with GeoIP enrichment, ASN lookup, and interactive dashboards — built for threat hunters, DFIR analysts, and blue teams.
 
 ---
+![WindowsSandboxRemoteSession_vH0JeHqj7s](https://github.com/user-attachments/assets/c5e4fdc8-b0ff-4eca-9d2e-ede6f37f693d)
+---
 
 ## 🚀 Features
 
